@@ -1,5 +1,4 @@
-package models;
-
+package main.Java;
 public class RubiksCube {
 //Blanc = 0
 //Bleu = 1
@@ -14,12 +13,12 @@ public class RubiksCube {
 // "" 3 = P
 // "" 4 = G
 // "" 5 = B
-    static final int H = 0;
-    static final int A = 1;
-    static final int D = 2;
-    static final int P = 3;
-    static final int G = 4;
-    static final int B = 5;
+    public static final int H = 0;
+    public static final int A = 1;
+    public static final int D = 2;
+    public static final int P = 3;
+    public static final int G = 4;
+    public static final int B = 5;
     private int[][][] cube = new int[6][3][3];
 
     public RubiksCube(){
@@ -32,6 +31,10 @@ public class RubiksCube {
             }
         }
     }
+
+    public int[][][] getCube() {
+    return this.cube;
+}
 
     private int[] getRow(int face, int row){
         return this.cube[face][row].clone();
@@ -76,17 +79,19 @@ public class RubiksCube {
     }
 
     public void rotationFace(int face,boolean direction){
-        int[][] tmp = new int[3][3];
-        for (int i =0;i<3;i++){
-            for (int j=0;j<3;j++){
-                if (direction){
-                    tmp[j][2 - i] = cube[face][i][j];
-                }
-                else{
-                    tmp[2 - j][i] =cube[face][i][j];
-                }
-            }
+        int[] l0 = getRow(face,0);
+        int[] l1 = getRow(face,1);
+        int[] l2 = getRow(face,2);
+        if(direction){
+            this.setCol(face, 2, l0);
+            this.setCol(face, 1, l1);
+            this.setCol(face, 0, l2);
+        }else{
+            this.setCol(face,2,l2);
+            this.setCol(face,1,l1);
+            this.setCol(face,0,l0);
         }
+
         switch(face){
             case RubiksCube.H: {
 
@@ -222,13 +227,25 @@ public class RubiksCube {
         }
     }
 
-    public static void main(String[] args) {
-        RubiksCube ru = new RubiksCube();
-        System.out.println(ru.toString());
-        ru.rotationFace(RubiksCube.H,true);
-        System.out.println(ru.toString());
-        ru.rotationFace(RubiksCube.H,false);
-        System.out.println(ru.toString());
-
+    public boolean verifierResolution(){
+        int x=0;
+        int y=0;
+        int z=0;
+        while (x<6 && y<3 && z<3){
+            if (this.cube[x][y][z]!=x){
+                return false;
+            }
+            z++;
+            if(z==3){
+                z=0;
+                y++;
+            }
+            if(y==3){
+                y=0;
+                x++;
+            }
+        }
+        return true;
     }
+
 }
