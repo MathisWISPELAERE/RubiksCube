@@ -24,19 +24,43 @@ public class Main {
                                int scancode,
                                int action,
                                int mods) {
-                System.out.println(key);
+                boolean shift = (mods & GLFW.GLFW_MOD_SHIFT) != 0;
                 if (key == GLFW.GLFW_KEY_W && action == GLFW.GLFW_PRESS){
-                    Main.cube.rotationFace(RubiksCube.H, true);
+                    if(shift){
+                        Main.cube.rotationFace(RubiksCube.H, false);
+                    }else{
+                        Main.cube.rotationFace(RubiksCube.H, true);
+                    }
                 }else if (key == GLFW.GLFW_KEY_A && action == GLFW.GLFW_PRESS){
-                    Main.cube.rotationFace(RubiksCube.G, true);
+                    if(shift){
+                        Main.cube.rotationFace(RubiksCube.G, false);
+                    }else{
+                        Main.cube.rotationFace(RubiksCube.G, true);
+                    }
                 }else if (key == GLFW.GLFW_KEY_S && action == GLFW.GLFW_PRESS){
-                    Main.cube.rotationFace(RubiksCube.A, true);
+                    if(shift){
+                        Main.cube.rotationFace(RubiksCube.A, false);
+                    }else{
+                        Main.cube.rotationFace(RubiksCube.A, true);
+                    }
                 }else if (key == GLFW.GLFW_KEY_D && action == GLFW.GLFW_PRESS){
-                    Main.cube.rotationFace(RubiksCube.D, true);
+                    if(shift){
+                        Main.cube.rotationFace(RubiksCube.D, false);
+                    }else{
+                        Main.cube.rotationFace(RubiksCube.D, true);
+                    }
                 }else if (key == GLFW.GLFW_KEY_F && action == GLFW.GLFW_PRESS){
-                    Main.cube.rotationFace(RubiksCube.P, true);
+                    if(shift){
+                        Main.cube.rotationFace(RubiksCube.P, false);
+                    }else{
+                        Main.cube.rotationFace(RubiksCube.P, true);
+                    }
                 }else if (key == GLFW.GLFW_KEY_C && action == GLFW.GLFW_PRESS){
-                    Main.cube.rotationFace(RubiksCube.B, true);
+                    if(shift){
+                        Main.cube.rotationFace(RubiksCube.B, false);
+                    }else{
+                        Main.cube.rotationFace(RubiksCube.B, true);
+                    }
                 }         
             };}                         
         );
